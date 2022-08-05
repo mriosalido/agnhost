@@ -27,8 +27,8 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"k8s.io/kubernetes/test/images/agnhost/dns"
-	"k8s.io/kubernetes/test/images/resource-consumer/common"
+	"agnhost/dns"
+	"agnhost/resource-consumer/common"
 )
 
 // CmdResourceConsumerController is used by agnhost Cobra.

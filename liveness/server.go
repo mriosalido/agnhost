@@ -29,7 +29,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// CmdLiveness is used by agnhost Cobra.
+//CmdLiveness is used by agnhost Cobra.
 var CmdLiveness = &cobra.Command{
 	Use:   "liveness",
 	Short: "Starts a server that is alive for 10 seconds",
@@ -45,9 +45,20 @@ func main(cmd *cobra.Command, args []string) {
 		data := (time.Since(started)).String()
 		w.Write([]byte(data))
 	})
-	http.HandleFunc("/healthz", func(w http.ResponseWriter, r *http.Request) {
+	http.HandleFunc("/readiness", func(w http.ResponseWriter, r *http.Request) {
 		duration := time.Since(started)
 		if duration.Seconds() > 10 {
+			w.WriteHeader(200)
+			data := (time.Since(started)).String()
+			w.Write([]byte(data))
+		} else {
+			w.WriteHeader(500)
+			w.Write([]byte(fmt.Sprintf("error: %v", duration.Seconds())))
+		}
+	})
+	http.HandleFunc("/healthz", func(w http.ResponseWriter, r *http.Request) {
+		duration := time.Since(started)
+		if duration.Seconds() > 50 {
 			w.WriteHeader(500)
 			w.Write([]byte(fmt.Sprintf("error: %v", duration.Seconds())))
 		} else {

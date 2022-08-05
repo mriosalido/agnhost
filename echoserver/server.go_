@@ -1,0 +1,71 @@
+// package main
+
+// import (
+// 	"bytes"
+// 	"context"
+// 	"encoding/base64"
+// 	"encoding/json"
+// 	"fmt"
+// 	"io"
+// 	"io/ioutil"
+// 	"net"
+// 	"net/http"
+// 	"os"
+// 	"strconv"
+
+// 	"golang.org/x/net/http2"
+// 	"golang.org/x/net/http2/h2c"
+// 	"google.golang.org/grpc"
+// 	"google.golang.org/grpc/credentials"
+// 	"google.golang.org/grpc/peer"
+// 	"google.golang.org/grpc/reflection"
+// )
+
+
+
+// func StartHttp2TLSServer(port int) {
+// 	server := &http.Server{
+// 		Addr:    "0.0.0.0:" + strconv.Itoa(port),
+// 		Handler: http.HandlerFunc(handler),
+// 	}
+
+// 	err := http2.ConfigureServer(server, &http2.Server{})
+
+// 	if err != nil {
+// 		panic(err)
+// 	}
+
+// 	fmt.Printf("listening on %s, TLS enbaled, http1.1, http/2\n", server.Addr)
+// 	if err := server.ListenAndServeTLS("./default.pem", "./default.key"); err != nil {
+// 		panic(err)
+// 	}
+// }
+
+
+// func StartGrpcWithTLSServer(port int) {
+// 	c, err := credentials.NewServerTLSFromFile("./default.pem", "./default.key")
+
+// 	if err != nil {
+// 		panic(err)
+// 	}
+
+// 	addr := ":" + strconv.Itoa(port)
+// 	lis, err := net.Listen("tcp", addr)
+
+// 	if err != nil {
+// 		panic(err)
+// 	}
+
+// 	s := grpc.NewServer(grpc.Creds(c))
+// 	reflection.Register(s)
+// 	RegisterHelloWorldServer(s, &GrpcServer{})
+
+// 	fmt.Printf("listening on %s, grpc\n", addr)
+
+// 	if err := s.Serve(lis); err != nil {
+// 		panic(err)
+// 	}
+// }
+
+
+

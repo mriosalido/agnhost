@@ -33,7 +33,7 @@ import (
 	"net"
 	"time"
 
-	"k8s.io/kubernetes/test/images/agnhost/net/common"
+	"agnhost/net/common"
 )
 
 // leakedConnection is a global variable that should leak the active
